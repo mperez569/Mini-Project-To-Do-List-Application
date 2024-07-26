@@ -1,6 +1,4 @@
-#To Do List Application
 def display_menu():
-    """Display the main menu of the To-Do List Application."""
     print("""
 Welcome to the To-Do List App!
 
@@ -12,35 +10,20 @@ Menu:
 5. Quit
 """)
 
-def add_task(tasks):
-    """Add a new task to the list with the title 'Incomplete'.
-
-    Args:
-        tasks (list): The list of tasks.
-    """
+def add(tasks):
     task = input("Enter the task title: ")
     tasks.append({'title': task, 'status': "Incomplete"})
     print("Task added!")
 
-def view_tasks(tasks):
-    """View all tasks in the list with their titles and statuses.
-
-    Args:
-        tasks (list): The list of tasks.
-    """
+def view(tasks):
     if not tasks:
         print("No tasks available.")
     else:
         for i, task in enumerate(tasks):
             print(f"{i+1}. {task['title']} - {task['status']}")
 
-def mark_task_as_complete(tasks):
-    """Mark a specific task as complete.
-
-    Args:
-        tasks (list): The list of tasks.
-    """
-    view_tasks(tasks)
+def completed(tasks):
+    view(tasks)
     try:
         task_num = int(input("Enter the task number to mark as complete: "))
         if 1 <= task_num <= len(tasks):
@@ -51,13 +34,8 @@ def mark_task_as_complete(tasks):
     except ValueError:
         print("Invalid input. Please enter a valid task number.")
 
-def delete_task(tasks):
-    """Delete a specific task from the list.
-
-    Args:
-        tasks (list): The list of tasks.
-    """
-    view_tasks(tasks)
+def delete(tasks):
+    view(tasks)
     try:
         task_num = int(input("Enter the task number to delete: "))
         if 1 <= task_num <= len(tasks):
@@ -69,20 +47,19 @@ def delete_task(tasks):
         print("Invalid input. Please enter a valid task number.")
 
 def main():
-    """Main function to handle the To-Do List Application logic."""
     tasks = []
     while True:
         display_menu()
         choice = input("Enter your choice: ")
         try:
             if choice == '1':
-                add_task(tasks)
+                add(tasks)
             elif choice == '2':
-                view_tasks(tasks)
+                view(tasks)
             elif choice == '3':
-                mark_task_as_complete(tasks)
+                completed(tasks)
             elif choice == '4':
-                delete_task(tasks)
+                delete(tasks)
             elif choice == '5':
                 print("Thank you for using the To-Do List App! Goodbye!")
                 break
